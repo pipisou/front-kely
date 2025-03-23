@@ -1,0 +1,27 @@
+<div>
+    <h2>Modifier un Détail de Service</h2>
+    <form [formGroup]="serviceDetailsForm" (ngSubmit)="onSubmit()">
+  
+      <!-- Sélection du service -->
+      <label for="service">Service</label>
+      <select formControlName="service" required>
+        <option *ngFor="let service of services" [value]="service._id">{{ service.nomService }}</option>
+      </select>
+  
+      <!-- Sélection de la catégorie de véhicule -->
+      <label for="categorieDeVehicule">Catégorie de Véhicule</label>
+      <select formControlName="categorieDeVehicule" required>
+        <option *ngFor="let category of categories" [value]="category._id">{{ category.nom }}</option>
+      </select>
+  
+      <!-- Sélection du service prérequis -->
+      <label for="servicePrerequis">Service Prérequis (Facultatif)</label>
+      <select formControlName="servicePrerequis">
+        <option value="">Aucun</option>
+        <option *ngFor="let prerequis of servicePrerequisList" [value]="prerequis._id">{{ prerequis.service.nomService }}/{{ prerequis.categorieDeVehicule.nom }}</option>
+      </select>
+  
+      <button type="submit" [disabled]="serviceDetailsForm.invalid">Modifier</button>
+    </form>
+  </div>
+  
